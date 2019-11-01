@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthenticationService {
-
+  
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
@@ -32,6 +32,14 @@ export class AuthenticationService {
       return user;
   }));
 
+  }
+
+  getUserName(userData: any) {
+    //console.log(userData)
+    return this._http.post<any>(`${this.url}/userName`, userData).pipe(map(userName =>{
+      return userName
+    }))
+    
   }
 
   logout() {

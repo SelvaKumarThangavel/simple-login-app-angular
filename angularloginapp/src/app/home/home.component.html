@@ -1,5 +1,13 @@
-<nav class="navbar navbar-light" style="background-color:thistle;">
-  <div class="container-fluid">
-    <button type="button" class="btn btn-secondary">Logout</button>
+<!-- <nav class="navbar navbar-light" style="background-color:lightblue;">
+  <div class="buttonStyle">
+    <button type="button" class="btn btn-primary" (click)="redirect()">Logout</button>
   </div>
+</nav>
+ -->
+<nav class="navbar navbar-light bg-light">
+    <div class="align-self-end ml-auto">
+      Welcome {{usrName}}
+      &nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-primary" (click)="redirect()">Logout</button> 
+      </div>
 </nav>

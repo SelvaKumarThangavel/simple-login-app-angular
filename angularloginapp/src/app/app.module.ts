@@ -8,13 +8,15 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 //import { AuthGuardComponent } from './_guards/auth-guard/auth-guard.component'
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
-import { ErrorInterceptor } from './_helpers/error.interceptor'
+import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    ForgotpasswordComponent
   ],
   imports: [
     BrowserModule,

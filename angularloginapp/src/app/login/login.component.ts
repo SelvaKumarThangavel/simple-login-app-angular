@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../_service/authentication.service';
 import { first } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,10 @@ export class LoginComponent implements OnInit {
   
   loginForm: FormGroup;
   //returnUrl: string;
-
+  userName: string;
+  public show: boolean = false;
+  public buttonName: any = 'Hide';
+  
    get email(){
     return this.loginForm.get('email');
   }
@@ -42,15 +46,40 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    //console.log(this.loginForm.value);
+     var swal: any = Swal.mixin({
+      toast: true,
+      width:'400px',
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 1000
+      });
+    //this.userName = this.loginForm.value.email;
     this.authenticationService.login(this.loginForm.value).pipe(first())
     .subscribe(
         data => {
-          console.log(data)
+          if(data.error === undefined){
+            this.authenticationService.getUserName(this.loginForm.value).pipe(first())
+            .subscribe(
+              userName => {
+                this.userName = userName;
+              }
+            )
+            //console.log(data)
             this.router.navigate(['/home']);
+          }else{
+             swal.fire({
+              type: 'error',
+              title: data.error
+              }) 
+          }
         }
-      //error => console.log('Error ::: ',error)
     )
+    this.show = !this.show;
+    if (this.show)
+      this.buttonName = "Hide";
+    else
+      this.buttonName = "Show";
+    
 
   }
 
