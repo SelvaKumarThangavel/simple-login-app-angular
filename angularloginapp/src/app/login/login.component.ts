@@ -61,10 +61,12 @@ export class LoginComponent implements OnInit {
             this.authenticationService.getUserName(this.loginForm.value).pipe(first())
             .subscribe(
               userName => {
-                this.userName = userName;
+                if(userName){
+                  this.userName = userName;
+                  //console.log(this.userName)
+                }   
               }
             )
-            //console.log(data)
             this.router.navigate(['/home']);
           }else{
              swal.fire({
@@ -79,8 +81,5 @@ export class LoginComponent implements OnInit {
       this.buttonName = "Hide";
     else
       this.buttonName = "Show";
-    
-
   }
-
 }

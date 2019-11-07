@@ -8,14 +8,16 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  @Input() usrName: string;
+  usrName: string;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
+    this.usrName = localStorage.getItem('userName')
   }
 
   redirect(){
+    //console.log(this.usrName)
     this.router.navigate(['/login'])
   }
   

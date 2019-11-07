@@ -31,20 +31,34 @@ export class AuthenticationService {
       this.currentUserSubject.next(user);
       return user;
   }));
-
   }
 
   getUserName(userData: any) {
     //console.log(userData)
     return this._http.post<any>(`${this.url}/userName`, userData).pipe(map(userName =>{
+      //store username in localstorage
+      localStorage.setItem('userName', userName);
       return userName
     }))
-    
+  }
+
+  resetPassword(userData: any) {
+    //console.log(userData)
+    return this._http.post<any>(`${this.url}/resetPassword`, userData).pipe(map(user =>{
+      return user
+    }))
   }
 
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-}
+  }
+
+  newUserRegister(userData: any) {
+    console.log(userData)
+    return this._http.post<any>(`${this.url}/newUser`, userData).pipe(map(user=>{
+      return user
+    }))
+  }
 }
