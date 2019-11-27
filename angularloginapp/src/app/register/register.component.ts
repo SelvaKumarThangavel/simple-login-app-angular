@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   registrationForm: FormGroup
+  signupRequest : any;
 
   get email() {
     return this.registrationForm.get('email');
@@ -36,6 +37,7 @@ export class RegisterComponent implements OnInit {
       password: ['', Validators.required],
       username: ['', Validators.required]
     })
+    
   }
 
   onRegister(){
@@ -46,12 +48,15 @@ export class RegisterComponent implements OnInit {
       showConfirmButton: false,
       timer: 1000
       });
-    this.authenticationService.newUserRegister(this.registrationForm.value).pipe(first())
+
+    this.signupRequest = {email:this.registrationForm.value.email, password: this.registrationForm.value.password, username: this.registrationForm.value.username}
+
+    this.authenticationService.newUserRegister(this.signupRequest).pipe(first())
     .subscribe(data =>{
-        if(data.error === undefined){
+        if(data.success === true){
           swal.fire({
             type: 'success',
-            title: 'User Created Successfully'
+            title: data.message
             })
             this.router.navigate(['/login']);
         }else{

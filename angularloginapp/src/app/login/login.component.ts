@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit {
   public show: boolean = false;
   public buttonName: any = 'Hide';
   
-   get email(){
-    return this.loginForm.get('email');
+   get usernameOrEmail(){
+    return this.loginForm.get('usernameOrEmail');
   }
 
   get password(){
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
      this.loginForm = this.fb.group({
-      email:['', Validators.required],
+      usernameOrEmail:['', Validators.required],
       password:['', Validators.required]
     })
   // get return url from route parameters or default to '/'
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
     .subscribe(
         data => {
           if(data.error === undefined){
-            this.authenticationService.getUserName(this.loginForm.value).pipe(first())
+            /* this.authenticationService.getUserName(this.loginForm.value).pipe(first())
             .subscribe(
               userName => {
                 if(userName){
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
                   //console.log(this.userName)
                 }   
               }
-            )
+            ) */
             this.router.navigate(['/home']);
           }else{
              swal.fire({

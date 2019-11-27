@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './_guards/auth-guard';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { RegisterComponent } from './register/register.component';
+import { AddComponent } from './add/add.component';
 
 const routes: Routes = [
   {path : '', redirectTo : '/login', pathMatch:'full'},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path : 'home', component : HomeComponent, canActivate: [AuthGuard]},
   {path : 'forgotPassword', component : ForgotpasswordComponent},
   {path : 'register', component : RegisterComponent},
+  {path : 'addEmployee', component : AddComponent},
 ];
 
 @NgModule({
@@ -19,4 +21,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents=[HomeComponent, LoginComponent, ForgotpasswordComponent, RegisterComponent]; 
+export const routingComponents=[HomeComponent, LoginComponent, ForgotpasswordComponent, RegisterComponent, AddComponent]; 

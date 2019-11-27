@@ -1,0 +1,44 @@
+<div class="container">
+    <nav class="navbar navbar-dark bg-secondary">
+        <a class="navbar-brand" href="/addEmployee">
+            Add Employee
+        </a>
+        <a class="navbar-brand" href="#">
+            KYC Details
+        </a>
+    </nav>
+    <br />
+    <form [formGroup]="addEmployeeForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col">
+                <label>Employee Name</label>
+                <input formControlName="name" [class.is-invalid]="name.invalid && name.touched" type="text"
+                    class="form-control">
+                <small class="text-danger" [class.d-none]="name.valid || name.untouched">Employee Name is
+                    required</small>
+            </div>
+
+            <div class="col">
+                <label>Gender</label>
+                <!-- <input formControlName="gender" [class.is-invalid]="gender.invalid && gender.touched"
+                type="dropdown" class="form-control"> -->
+                <select class="form-control" (change)="onChangeGender($event)">
+                    <option value="0">Select</option>
+                    <option *ngFor="let gender of genders">
+                        {{gender.name}}
+                    </option>
+                </select>
+                <!-- <small class="text-danger" [class.d-none]="gender.valid || gender.untouched">Gender is required</small> -->
+            </div>
+
+            <div class="col">
+                <label>Date of Birth</label>
+                <input formControlName="dob" [class.is-invalid]="dob.invalid && dob.touched" type="date"
+                    class="form-control">
+                <small class="text-danger" [class.d-none]="dob.valid || dob.untouched">DOB is required</small>
+            </div>
+        </div>
+        <br />
+        <button class="btn btn-primary" type="submit">Save</button><br />
+    </form>
+</div>

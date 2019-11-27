@@ -13,7 +13,7 @@ export class JwtInterceptor implements HttpInterceptor {
         if (currentUser) {
             request = request.clone({
                 setHeaders: { 
-                    AuthToken: `${currentUser}`
+                    AuthToken: `${currentUser.accessToken}`
                 }
             });
         }
